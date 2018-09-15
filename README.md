@@ -6,7 +6,12 @@
 
 Make sure git and npm is installed
 
-`$ git clone https://github.com/vchoisk/beer-shop.git\n$ cd beer-shop\n$ npm install\n$ npm start`
+```$ git clone https://github.com/vchoisk/beer-shop.git
+$ cd beer-shop
+$ npm install
+$ npm start
+```
+
 Start coding with live loading window open: localhost:PORT_NUM(3000, if open)
 
 ## Tech stack
