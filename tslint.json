@@ -10,7 +10,6 @@
   "rules": {
     "ordered-imports": [false],
     "object-literal-sort-keys": [false],
-    "jsx-boolean-value": false,
-    "interface-name": [true, "never-prefix"]
+    "jsx-boolean-value": false
   }
 }
