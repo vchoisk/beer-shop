@@ -12,7 +12,7 @@ export interface Ibeer {
   stock: number
 }
 
-interface Ipurchase {
+export interface Ipurchase {
   id: number
   count: number
 }

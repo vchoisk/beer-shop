@@ -1,15 +1,16 @@
-import db from 'db.json5on'
-import { Ibeer, Ipurchase } from '../interface.ts'
+import db from 'db.json'
+import { Itags, Ibeer, Ipurchase } from '../interface'
 
-const fakeAPI = (method: string, path: string, params?: object) => {
+const fakeAPI = (
+  url: string,
+  method: string,
+  params?: { purchaseList: Ipurchase[] }
+) => {
   const fakeRouter = {
     '/api/beers': {
       GET: () =>
         new Promise(
-          (
-            resolve: (beers: object[]) => any,
-            reject: (error: Error) => any
-          ) => {
+          (resolve: (beers: {}[]) => any, reject: (error: Error) => any) => {
             if (db.beers) {
               setTimeout(resolve(db.beers))
             } else {
@@ -21,7 +22,10 @@ const fakeAPI = (method: string, path: string, params?: object) => {
     '/api/tags': {
       GET: () =>
         new Promise(
-          (resolve: (tags: object[]) => any, reject: (error: Error) => any) => {
+          (
+            resolve: (tags: { id: number; name: string }[]) => any,
+            reject: (error: Error) => any
+          ) => {
             if (db.tags) {
               setTimeout(resolve(db.tags))
             } else {
@@ -33,7 +37,10 @@ const fakeAPI = (method: string, path: string, params?: object) => {
     '/api/purchase': {
       POST: (purchaseList: Ipurchase[]) =>
         new Promise(
-          (resolve: (total: object) => any, reject: (error: Error) => any) => {
+          (
+            resolve: (total: { totalCount: number; totalPrice: number }) => any,
+            reject: (error: Error) => any
+          ) => {
             let valid = true
 
             let total = {
@@ -67,11 +74,17 @@ const fakeAPI = (method: string, path: string, params?: object) => {
     },
   }
 
-  return
+  fakeRouter[url][method](params && params.purchaseList)
 }
 
 export const fetchBeers = async () => {
-  const beers: Ibeer[] = await fakeAPI['/api/beers']['GET']()
+  const beers: Ibeer[] = await fakeAPI('/api/beers', 'GET')
 
   return beers
+}
+
+export const fetchTags = async () => {
+  const tags: Itags[] = await fakeAPI('/api/tags', 'GET')
+
+  return tags
 }
