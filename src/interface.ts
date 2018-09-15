@@ -11,3 +11,8 @@ export interface Ibeer {
   price: number
   stock: number
 }
+
+interface Ipurchase {
+  id: number
+  count: number
+}

@@ -1,4 +1,5 @@
 import db from 'db.json5on'
+import { Ibeer, Ipurchase } from '../interface.ts'
 
 const fakeAPI = (method: string, path: string, params?: object) => {
   const fakeRouter = {
@@ -30,9 +31,38 @@ const fakeAPI = (method: string, path: string, params?: object) => {
         ),
     },
     '/api/purchase': {
-      POST: (purchaseInformation: object[]) =>
+      POST: (purchaseList: Ipurchase[]) =>
         new Promise(
-          (resolve: (total: object) => any, reject: (error: Error) => any) => {}
+          (resolve: (total: object) => any, reject: (error: Error) => any) => {
+            let valid = true
+
+            let total = {
+              totalCount: 0,
+              totalPrice: 0,
+            }
+
+            const beerStock = db.beers.reduce(
+              (stockMapper: object, beer: Ibeer) =>
+                Object.assign({ [beer.id]: beer }, stockMapper),
+              {}
+            )
+
+            purchaseList.forEach((purchase: Ipurchase) => {
+              if (beerStock[purchase.id].stock <= purchase.count) {
+                total.totalCount += purchase.count
+                total.totalPrice +=
+                  purchase.count * beerStock[purchase.id].price
+              } else {
+                valid = false
+              }
+            })
+
+            if (valid) {
+              resolve(total)
+            } else {
+              reject(new Error('not valid counts in the request'))
+            }
+          }
         ),
     },
   }
@@ -41,5 +71,7 @@ const fakeAPI = (method: string, path: string, params?: object) => {
 }
 
 export const fetchBeers = async () => {
-  await setTimeout()
+  const beers: Ibeer[] = await fakeAPI['/api/beers']['GET']()
+
+  return beers
 }
