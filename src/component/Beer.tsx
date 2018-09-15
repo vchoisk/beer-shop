@@ -1,11 +1,27 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
+import { fetchTags } from '../api/api.ts'
+
+import { Itags } from '../interface.ts'
+
 export interface IBeerProps extends RouteComponentProps<any> {
   categories: string[]
 }
 
 export class Beer extends React.Component<IBeerProps, {}> {
+  state = {
+    tags: [],
+  }
+
+  componentDidMount = async () => {
+    const tags: Itags[] = await fetchTags()
+
+    this.setState({
+      tags,
+    })
+  }
+
   public render() {
     return (
       <div className="content beer">

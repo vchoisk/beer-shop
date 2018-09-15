@@ -1,4 +1,4 @@
-import db from 'db.json'
+import db from './data/db'
 import { Itags, Ibeer, Ipurchase } from '../interface'
 
 const fakeAPI = (
