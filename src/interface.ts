@@ -1,5 +1,5 @@
 export interface Itags {
-  id: number
+  key: number
   name: string
 }
 

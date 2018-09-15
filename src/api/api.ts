@@ -10,7 +10,10 @@ const fakeAPI = (
     '/api/beers': {
       GET: () =>
         new Promise(
-          (resolve: (beers: {}[]) => any, reject: (error: Error) => any) => {
+          (
+            resolve: (beers: object) => void,
+            reject: (error: Error) => void
+          ) => {
             if (db.beers) {
               setTimeout(resolve(db.beers))
             } else {
@@ -23,8 +26,8 @@ const fakeAPI = (
       GET: () =>
         new Promise(
           (
-            resolve: (tags: { id: number; name: string }[]) => any,
-            reject: (error: Error) => any
+            resolve: (tags: Itags[]) => void,
+            reject: (error: Error) => void
           ) => {
             if (db.tags) {
               setTimeout(resolve(db.tags))
@@ -38,19 +41,21 @@ const fakeAPI = (
       POST: (purchaseList: Ipurchase[]) =>
         new Promise(
           (
-            resolve: (total: { totalCount: number; totalPrice: number }) => any,
-            reject: (error: Error) => any
+            resolve: (
+              total: { totalCount: number; totalPrice: number }
+            ) => void,
+            reject: (error: Error) => void
           ) => {
             let valid = true
 
-            let total = {
+            const total = {
               totalCount: 0,
               totalPrice: 0,
             }
 
             const beerStock = db.beers.reduce(
-              (stockMapper: object, beer: Ibeer) =>
-                Object.assign({ [beer.id]: beer }, stockMapper),
+              (stockMapper, beer) =>
+                Object.assign({ [String(beer.id)]: beer }, stockMapper),
               {}
             )
 
@@ -74,17 +79,17 @@ const fakeAPI = (
     },
   }
 
-  fakeRouter[url][method](params && params.purchaseList)
+  return fakeRouter[url][method](params && params.purchaseList)
 }
 
 export const fetchBeers = async () => {
-  const beers: Ibeer[] = await fakeAPI('/api/beers', 'GET')
+  const beers: Ibeer[] | void = await fakeAPI('/api/beers', 'GET')
 
   return beers
 }
 
 export const fetchTags = async () => {
-  const tags: Itags[] = await fakeAPI('/api/tags', 'GET')
+  const tags: Itags[] | void = await fakeAPI('/api/tags', 'GET')
 
   return tags
 }
