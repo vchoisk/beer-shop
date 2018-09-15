@@ -1,0 +1,33 @@
+.header {
+  .header__title {
+    background-color: $primaryBlue;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 16px;
+    font-weight: 500;
+  }
+
+  .header__nav-bar.nav-bar {
+    position: relative;
+    box-shadow: 0 3px 2px $secondaryGrey;
+
+    .nav-bar__current-location,
+    .nav-bar__icon-buttons {
+      width: 50%;
+      display: inline-block;
+      margin: 0;
+    }
+
+    .nav-bar__current-location {
+      font-size: 20px;
+      font-weight: 350;
+      padding: 16px 24px;
+    }
+
+    .nav-bar__icon-buttons {
+      text-align: right;
+      padding: 4px 16px;
+    }
+  }
+}

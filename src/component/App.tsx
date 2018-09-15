@@ -6,7 +6,7 @@ import { Routes } from './Routes'
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
+      <div className="app">
         <BrowserRouter>
           <Routes />
         </BrowserRouter>

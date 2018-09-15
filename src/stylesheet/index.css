@@ -1,10 +1,5 @@
-$primaryBlue: #3369e8;
-$secondaryGrey: #eff1f5;
+@import 'base';
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+@import 'widget/widgets';
 
-@import './button';
+@import 'header';
