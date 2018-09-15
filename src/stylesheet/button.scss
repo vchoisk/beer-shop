@@ -1,0 +1,47 @@
+.widget-button {
+  padding: 12px;
+  font-size: 12px;
+  position: relative;
+  display: inline-block;
+
+  img {
+    display: inline-block;
+    position: relative;
+  }
+}
+
+.widget-button .bordered {
+  border: solid 1px black;
+}
+
+.widget-button .primary {
+  color: $primaryBlue;
+}
+
+.widget-button .primary .bordered {
+  border: solid 1px $primaryBlue;
+}
+
+.widget-button .primary .contained {
+  color: white;
+  backgound-color: $primaryBlue;
+}
+
+.widget-button .secondary {
+  color: $secondaryGrey;
+}
+
+.widget-button .secondary .bordered {
+  border: solid 1px $secondaryGrey;
+}
+
+.widget-button .secondary .contained {
+  color: black;
+  backgound-color: $secondaryGrey;
+}
+
+.widget-button .disabled {
+  color: #a0a3a7;
+  backgound-color: #caccd2;
+  border: none;
+}
