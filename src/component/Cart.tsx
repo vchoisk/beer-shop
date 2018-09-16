@@ -18,7 +18,15 @@ export const Cart = (props: RouteComponentProps) => {
   const handlePurchase = async (purchaseList: Ipurchase[]) => {
     const response = await purchaseBeers(purchaseList)
 
-    console.log(response)
+    if (response) {
+      console.log(
+        `요청하신 맥주 총 ${
+          response.totalCount
+        }병의 주문이 완료되었습니다. \n 주문금액 총 ${
+          response.totalPrice
+        }원이 결제 되었습니다.`
+      )
+    }
   }
 
   return (

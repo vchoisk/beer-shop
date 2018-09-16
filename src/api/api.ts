@@ -92,9 +92,12 @@ export const fetchTags = async () => {
 }
 
 export const purchaseBeers = async (purchaseList: Ipurchase[]) => {
-  const tags: Itag[] | void = await fakeAPI('/api/purchase', 'POST', {
+  const purcahseSummary: {
+    totalCount: number
+    totalPrice: number
+  } | void = await fakeAPI('/api/purchase', 'POST', {
     purchaseList,
   })
 
-  return tags
+  return purcahseSummary
 }
