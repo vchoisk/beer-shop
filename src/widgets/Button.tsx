@@ -4,9 +4,10 @@ import { isUndefined } from 'lodash'
 export interface IButtonProps {
   children: JSX.Element
   variant?: string
-  primary?: boolean | undefined
-  secondary?: boolean | undefined
-  disabled?: boolean | undefined
+  primary?: boolean
+  secondary?: boolean
+  disabled?: boolean
+  fullWidth?: boolean
   className?: string
   onClick?: (event: React.MouseEvent<HTMLElement>) => {}
 }
@@ -28,6 +29,7 @@ export const Button = (props: IButtonProps) => {
   addClassName(!isUndefined(props.primary), 'primary')
   addClassName(!isUndefined(props.secondary), 'secondary')
   addClassName(!isUndefined(props.disabled), 'disabled')
+  addClassName(!isUndefined(props.fullWidth), 'full-width')
   addClassName(
     !isUndefined(props.variant),
     props.variant ? variantMapper[props.variant] : ''

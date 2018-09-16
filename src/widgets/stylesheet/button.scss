@@ -5,6 +5,7 @@
   display: inline-block;
   border-radius: 4px;
   font-weight: 300;
+  text-align: center;
 }
 
 .widget-button.bordered {
@@ -44,4 +45,8 @@
   color: #a0a3a7;
   background-color: #caccd2;
   border: none;
+}
+
+.full-width {
+  width: 100%;
 }

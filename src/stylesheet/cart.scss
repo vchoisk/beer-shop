@@ -1,0 +1,35 @@
+.cart {
+  .cart__beer-card-list {
+    margin-top: -10px;
+    text-align: center;
+    max-height: calc(100vh - 303px);
+    overflow-y: scroll;
+    padding-top: 28px;
+
+    .beer-card {
+      margin-bottom: 16px;
+    }
+  }
+
+  .cart__summary {
+    color: #95959e;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: right;
+    margin: 16px 0;
+
+    .cart__total-value {
+      font-weight: 600;
+    }
+    .cart__total-count {
+      margin-bottom: 12px;
+    }
+  }
+
+  .cart__purchase-button {
+    padding: 12px 0 10px 0;
+    .cart__purchase-button-text {
+      font-size: 20px;
+    }
+  }
+}

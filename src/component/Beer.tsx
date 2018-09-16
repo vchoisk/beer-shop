@@ -28,13 +28,7 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
 
     this.setState({
       tags: tags || [],
-      selectedTags: tags
-        ? tags.reduce(
-            (selectedTags: { [key: string]: boolean }, tag: Itag) =>
-              Object.assign(selectedTags, { [tag.key]: true }),
-            {}
-          )
-        : {},
+      selectedTags: {},
     })
   }
 
