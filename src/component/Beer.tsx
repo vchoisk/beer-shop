@@ -34,6 +34,27 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
     })
   }
 
+  public filterBeer = (beer: Ibeer) => {
+    // Display all beer if no tag is selected, or filter beers with no selected tags
+
+    const selectedTagKey = Object.keys(this.state.selectedTags)
+
+    return (
+      // Check if no tag is selected 1.no key in selectedTag, 2.no tag in selected tag has true value
+      selectedTagKey.length === 0 ||
+      selectedTagKey.reduce(
+        (noTagSelected: boolean, tagKey: string) =>
+          noTagSelected && !this.state.selectedTags[tagKey],
+        true
+      ) ||
+      beer.tags.reduce(
+        (tagSelected: boolean, tag: Itag) =>
+          tagSelected || this.state.selectedTags[tag.key],
+        false
+      )
+    )
+  }
+
   public handleToggleTag = (tag: Itag) => {
     this.setState({
       selectedTags: Object.assign({}, this.state.selectedTags, {
@@ -70,6 +91,7 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
           <BeerContext.Consumer>
             {beerContext =>
               beerContext.beers
+                .filter(this.filterBeer)
                 .slice(0, this.state.pagesDisplayed * 5)
                 .map((beer: Ibeer) => (
                   <BeerCard

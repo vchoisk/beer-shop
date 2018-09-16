@@ -3,7 +3,6 @@ import * as React from 'react'
 import { Button } from '../widgets/Button'
 
 import { Ibeer, Itag } from '../interface'
-import beerImg from '../asset/beer_x1.png'
 
 export interface IBeerCardProps {
   beer: Ibeer
@@ -16,7 +15,7 @@ export interface IBeerCardProps {
 export const BeerCard = (props: IBeerCardProps) => (
   <div className="beer-card">
     <div className="beer-card__img-container">
-      <img src={beerImg} alt={props.beer.name} />
+      <img src={props.beer.image} alt={props.beer.name} />
     </div>
 
     <div className="beer-card__information">
