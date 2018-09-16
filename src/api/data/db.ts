@@ -13,7 +13,7 @@ export default {
       stock: 6,
     },
     {
-      id: 0,
+      id: 1,
       name: 'Cass',
       image: 'a',
       tags: [
@@ -25,7 +25,7 @@ export default {
       stock: 6,
     },
     {
-      id: 0,
+      id: 2,
       name: 'Cass',
       image: 'a',
       tags: [
@@ -37,7 +37,7 @@ export default {
       stock: 6,
     },
     {
-      id: 0,
+      id: 3,
       name: 'Cass',
       image: 'a',
       tags: [

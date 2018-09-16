@@ -32,6 +32,7 @@ export const Cart = (props: RouteComponentProps) => {
                       key={beer.id}
                       beer={beer}
                       count={beerContext.selectedBeers[beer.id]}
+                      cartCard
                       handleAddBeer={beerContext.addBeerToCart.bind(null, beer)}
                       handleRemoveBeer={beerContext.removeBeerFromCart.bind(
                         null,
