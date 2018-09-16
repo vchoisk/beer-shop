@@ -1,5 +1,5 @@
 import db from './data/db'
-import { Itags, Ibeer, Ipurchase } from '../interface'
+import { Itag, Ibeer, Ipurchase } from '../interface'
 
 const fakeAPI = (
   url: string,
@@ -25,10 +25,7 @@ const fakeAPI = (
     '/api/tags': {
       GET: () =>
         new Promise(
-          (
-            resolve: (tags: Itags[]) => void,
-            reject: (error: Error) => void
-          ) => {
+          (resolve: (tags: Itag[]) => void, reject: (error: Error) => void) => {
             if (db.tags) {
               setTimeout(resolve(db.tags))
             } else {
@@ -89,7 +86,7 @@ export const fetchBeers = async () => {
 }
 
 export const fetchTags = async () => {
-  const tags: Itags[] | void = await fakeAPI('/api/tags', 'GET')
+  const tags: Itag[] | void = await fakeAPI('/api/tags', 'GET')
 
   return tags
 }

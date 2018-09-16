@@ -3,6 +3,8 @@
   font-size: 12px;
   position: relative;
   display: inline-block;
+  border-radius: 4px;
+  font-weight: 300;
 
   img {
     display: inline-block;
@@ -10,38 +12,38 @@
   }
 }
 
-.widget-button .bordered {
+.widget-button.bordered {
   border: solid 1px black;
 }
 
-.widget-button .primary {
+.widget-button.primary {
   color: $primaryBlue;
 }
 
-.widget-button .primary .bordered {
+.widget-button.primary.bordered {
   border: solid 1px $primaryBlue;
 }
 
-.widget-button .primary .contained {
+.widget-button.primary.contained {
   color: white;
-  backgound-color: $primaryBlue;
+  background-color: $primaryBlue;
 }
 
-.widget-button .secondary {
+.widget-button.secondary {
   color: $secondaryGrey;
 }
 
-.widget-button .secondary .bordered {
+.widget-button.secondary.bordered {
   border: solid 1px $secondaryGrey;
 }
 
-.widget-button .secondary .contained {
+.widget-button.secondary.contained {
   color: black;
-  backgound-color: $secondaryGrey;
+  background-color: $secondaryGrey;
 }
 
-.widget-button .disabled {
+.widget-button.disabled {
   color: #a0a3a7;
-  backgound-color: #caccd2;
+  background-color: #caccd2;
   border: none;
 }
