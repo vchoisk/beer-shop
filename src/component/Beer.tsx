@@ -69,18 +69,11 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
             {beerContext =>
               beerContext.beers.map((beer: Ibeer) => (
                 <BeerCard
-                  beer={{
-                    id: 0,
-                    name: 'Cass',
-                    image: 'a',
-                    tags: [
-                      { key: 10, name: '라거' },
-                      { key: 32, name: '드라이' },
-                      { key: 20, name: '국산맥주' },
-                    ],
-                    price: 500,
-                    stock: 6,
-                  }}
+                  key={beer.id}
+                  beer={beer}
+                  count={beerContext.selectedBeers[beer.id]}
+                  handleAddBeer={beerContext.addBeerToCart}
+                  handleRemoveBeer={beerContext.removeBeerFromCart}
                 />
               ))
             }

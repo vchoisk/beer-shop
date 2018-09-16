@@ -5,15 +5,15 @@ import { Ibeer } from '../interface'
 export interface IbeerStore {
   beers: Ibeer[]
   selectedBeers: { [id: string]: Ibeer }
-  addBeerToCart: (beer: Ibeer) => {}
-  removeBeerFromCart: (beer: Ibeer) => {}
+  addBeerToCart?: (beer: Ibeer) => {}
+  removeBeerFromCart?: (beer: Ibeer) => {}
 }
 
 export const defaultBeerStore = {
   beers: [],
   selectedBeers: {},
-  addBeerToCart: null,
-  removeBeerFromCart: null,
+  addBeerToCart: undefined,
+  removeBeerFromCart: undefined,
 }
 
 export const BeerContext = React.createContext(defaultBeerStore)
