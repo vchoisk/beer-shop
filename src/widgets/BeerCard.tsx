@@ -29,10 +29,12 @@ export const BeerCard = (props: IBeerCardProps) => (
         <span className="beer-card__price-label">원</span>
       </div>
       <div className="beer-card__counts">
-        <div className="beer-card__stock-count">
-          <span className="beer-card__stock-label">재고</span>
-          {props.beer.stock}
-        </div>
+        {!props.cartCard && (
+          <div className="beer-card__stock-count">
+            <span className="beer-card__stock-label">재고</span>
+            {props.beer.stock}
+          </div>
+        )}
         {props.count
           ? props.count > 0 && (
               <div className="beer-card__cart-count">
