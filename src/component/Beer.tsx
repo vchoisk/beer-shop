@@ -109,7 +109,10 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
                   <BeerCard
                     key={beer.id}
                     beer={beer}
-                    count={beerContext.selectedBeers[beer.id]}
+                    count={
+                      beerContext.selectedBeers[beer.id] &&
+                      beerContext.selectedBeers[beer.id].count
+                    }
                     handleAddBeer={beerContext.addBeerToCart.bind(null, beer)}
                     handleRemoveBeer={beerContext.removeBeerFromCart.bind(
                       null,

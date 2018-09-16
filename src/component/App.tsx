@@ -26,9 +26,11 @@ class App extends React.Component<{}, {}> {
   public addBeerToCart = (beer: Ibeer) => {
     const newSelectedBeers = Object.assign({}, this.state.selectedBeers)
 
-    newSelectedBeers[beer.id] = newSelectedBeers[beer.id]
-      ? newSelectedBeers[beer.id] + 1
-      : 1
+    if (newSelectedBeers[beer.id]) {
+      newSelectedBeers[beer.id].count = newSelectedBeers[beer.id].count + 1
+    } else {
+      newSelectedBeers[beer.id] = { count: 1, beer }
+    }
 
     this.setState(
       Object.assign({}, this.state, { selectedBeers: newSelectedBeers })
@@ -38,8 +40,8 @@ class App extends React.Component<{}, {}> {
   public removeBeerFromCart = (id: number) => {
     const newSelectedBeers = Object.assign({}, this.state.selectedBeers)
 
-    if (newSelectedBeers[id] && newSelectedBeers[id] > 0) {
-      newSelectedBeers[id] = newSelectedBeers[id] - 1
+    if (newSelectedBeers[id] && newSelectedBeers[id].count > 0) {
+      newSelectedBeers[id].count = newSelectedBeers[id].count - 1
     }
 
     this.setState(

@@ -52,7 +52,7 @@ class HeaderWithoutRouter extends React.Component<RouteComponentProps, {}> {
                 ).reduce(
                   (sum: number, id: string) =>
                     beerContext.selectedBeers[id] &&
-                    beerContext.selectedBeers[id] > 0
+                    beerContext.selectedBeers[id].count > 0
                       ? sum + 1
                       : sum,
                   0

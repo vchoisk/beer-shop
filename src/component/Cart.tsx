@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
-import { Ibeer } from '../interface'
+import { Ibeer, Ipurchase } from '../interface'
 import { Button } from '../widgets/Button'
 import { BeerCard } from '../widgets/BeerCard'
 import { BeerContext } from '../context/BeerContext'
+
+import { purchaseBeers } from '../api/api'
 
 import shopBagIcon from '../asset/icons/shopBag.svg'
 
@@ -13,14 +15,18 @@ export const Cart = (props: RouteComponentProps) => {
     props.history.push(path)
   }
 
+  const handlePurchase = async (purchaseList: Ipurchase[]) => {
+    const response = await purchaseBeers(purchaseList)
+
+    console.log(response)
+  }
+
   return (
     <BeerContext.Consumer>
       {beerContext => {
-        const selectedBeerList = beerContext.beers.filter(
-          (beer: Ibeer) =>
-            beerContext.selectedBeers[beer.id] &&
-            beerContext.selectedBeers[beer.id] > 0
-        )
+        const selectedBeerList = Object.keys(beerContext.selectedBeers)
+          .filter((id: string) => beerContext.selectedBeers[id].count >= 1)
+          .map((id: string) => beerContext.selectedBeers[id].beer)
 
         return (
           <div className="content cart">
@@ -31,7 +37,10 @@ export const Cart = (props: RouteComponentProps) => {
                     <BeerCard
                       key={beer.id}
                       beer={beer}
-                      count={beerContext.selectedBeers[beer.id]}
+                      count={
+                        beerContext.selectedBeers[beer.id] &&
+                        beerContext.selectedBeers[beer.id].count
+                      }
                       cartCard
                       handleAddBeer={beerContext.addBeerToCart.bind(null, beer)}
                       handleRemoveBeer={beerContext.removeBeerFromCart.bind(
@@ -44,11 +53,30 @@ export const Cart = (props: RouteComponentProps) => {
 
                 <div className="cart__summary">
                   <div className="cart__total-count">
-                    총 구매수량 <span className="cart__total-value">{1}</span>개
+                    총 구매수량
+                    {'  '}
+                    <span className="cart__total-value">
+                      {Object.keys(beerContext.selectedBeers).reduce(
+                        (count: number, id: string) =>
+                          count + beerContext.selectedBeers[id].count,
+                        0
+                      )}
+                    </span>
+                    {'  '}개
                   </div>
                   <div className="cart__total-amount">
-                    총 결제금액{' '}
-                    <span className="cart__total-value">{10000}</span>원
+                    총 결제금액
+                    {'  '}
+                    <span className="cart__total-value">
+                      {Object.keys(beerContext.selectedBeers).reduce(
+                        (price: number, id: string) =>
+                          price +
+                          beerContext.selectedBeers[id].count *
+                            beerContext.selectedBeers[id].beer.price,
+                        0
+                      )}
+                    </span>
+                    {'  '}원
                   </div>
                 </div>
 
@@ -57,6 +85,17 @@ export const Cart = (props: RouteComponentProps) => {
                   primary
                   variant="contained"
                   fullWidth
+                  onClick={handlePurchase.bind(
+                    null,
+                    Object.keys(beerContext.selectedBeers)
+                      .filter(
+                        (id: string) => beerContext.selectedBeers[id].count >= 1
+                      )
+                      .map((id: string) => ({
+                        id,
+                        count: beerContext.selectedBeers[id].count,
+                      }))
+                  )}
                 >
                   <span className="cart__purchase-button-text">구매하기</span>
                 </Button>

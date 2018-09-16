@@ -57,7 +57,7 @@ const fakeAPI = (
             )
 
             purchaseList.forEach((purchase: Ipurchase) => {
-              if (beerStock[purchase.id].stock <= purchase.count) {
+              if (beerStock[purchase.id].stock >= purchase.count) {
                 total.totalCount += purchase.count
                 total.totalPrice +=
                   purchase.count * beerStock[purchase.id].price
@@ -87,6 +87,14 @@ export const fetchBeers = async () => {
 
 export const fetchTags = async () => {
   const tags: Itag[] | void = await fakeAPI('/api/tags', 'GET')
+
+  return tags
+}
+
+export const purchaseBeers = async (purchaseList: Ipurchase[]) => {
+  const tags: Itag[] | void = await fakeAPI('/api/purchase', 'POST', {
+    purchaseList,
+  })
 
   return tags
 }
