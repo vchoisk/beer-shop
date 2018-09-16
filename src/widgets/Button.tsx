@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { isUndefined } from 'lodash'
 
 export interface IButtonProps {
   children: JSX.Element
@@ -25,13 +24,13 @@ export const Button = (props: IButtonProps) => {
   }
 
   const buttonClassNames = ['widget-button']
-  addClassName(!isUndefined(props.className), props.className || '')
-  addClassName(!isUndefined(props.primary), 'primary')
-  addClassName(!isUndefined(props.secondary), 'secondary')
-  addClassName(!isUndefined(props.disabled), 'disabled')
-  addClassName(!isUndefined(props.fullWidth), 'full-width')
+  addClassName(!!props.className, props.className || '')
+  addClassName(!!props.primary, 'primary')
+  addClassName(!!props.secondary, 'secondary')
+  addClassName(!!props.disabled, 'disabled')
+  addClassName(!!props.fullWidth, 'full-width')
   addClassName(
-    !isUndefined(props.variant),
+    !!props.variant,
     props.variant ? variantMapper[props.variant] : ''
   )
 

@@ -32,7 +32,7 @@ export const BeerCard = (props: IBeerCardProps) => (
         {!props.cartCard && (
           <div className="beer-card__stock-count">
             <span className="beer-card__stock-label">재고</span>
-            {props.beer.stock}
+            {props.beer.stock - (props.count || 0)}
           </div>
         )}
         {props.count
@@ -62,8 +62,9 @@ export const BeerCard = (props: IBeerCardProps) => (
       {!props.cartCard && (
         <Button
           className="beer-card__button-add"
-          primary
+          primary={props.beer.stock - (props.count || 0) > 0}
           variant="contained"
+          disabled={props.beer.stock - (props.count || 0) <= 0}
           onClick={props.handleAddBeer}
         >
           <span>담기</span>
