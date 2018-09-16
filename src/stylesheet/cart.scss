@@ -32,4 +32,25 @@
       font-size: 20px;
     }
   }
+
+  .cart__empty-container {
+    width: 168px;
+    margin: auto;
+    margin-top: 72px;
+    text-align: center;
+
+    .cart__empty-statement {
+      color: #6e6e78;
+      font-size: 20px;
+      font-weight: 500;
+      margin: 16px 0;
+    }
+
+    .cart__empty-guidance {
+      color: #95959e;
+      font-size: 14px;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+  }
 }

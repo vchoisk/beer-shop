@@ -1,12 +1,18 @@
 import * as React from 'react'
+import { RouteComponentProps } from 'react-router-dom'
 
 import { Ibeer } from '../interface'
-
 import { Button } from '../widgets/Button'
 import { BeerCard } from '../widgets/BeerCard'
 import { BeerContext } from '../context/BeerContext'
 
-export const Cart = () => {
+import shopBagIcon from '../asset/icons/shopBag.svg'
+
+export const Cart = (props: RouteComponentProps) => {
+  const handleDirectToUrl = (path: string) => {
+    props.history.push(path)
+  }
+
   return (
     <BeerContext.Consumer>
       {beerContext => {
@@ -55,7 +61,27 @@ export const Cart = () => {
                 </Button>
               </React.Fragment>
             ) : (
-              <div>카트가 비었습니다.</div>
+              <div className="cart__empty-container">
+                <div className="cart__empty-img">
+                  <img src={shopBagIcon} alt="쇼핑백이 비었네요" />
+                </div>
+                <div className="cart__empty-statement">카트가 비었습니다</div>
+                <div className="cart__empty-guidance">
+                  목록에서 원하는 맥주를 <br />
+                  카트에 담아보세요
+                </div>
+                <Button
+                  className="cart__purchase-button"
+                  primary
+                  variant="contained"
+                  fullWidth
+                  onClick={handleDirectToUrl.bind(null, '/')}
+                >
+                  <span className="cart__empty-direct-button">
+                    목록으로 가기
+                  </span>
+                </Button>
+              </div>
             )}
           </div>
         )

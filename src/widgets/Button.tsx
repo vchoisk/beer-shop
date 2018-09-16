@@ -9,7 +9,7 @@ export interface IButtonProps {
   disabled?: boolean
   fullWidth?: boolean
   className?: string
-  onClick?: (event: React.MouseEvent<HTMLElement>) => {}
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void
 }
 
 export const Button = (props: IButtonProps) => {
