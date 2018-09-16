@@ -55,6 +55,17 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
     )
   }
 
+  public sortBeer = (beerA: Ibeer, beerB: Ibeer) => {
+    const matchCount = (tags: Itag[]) =>
+      tags.reduce(
+        (count: number, tag: Itag) =>
+          this.state.selectedTags[tag.key] ? count + 1 : count,
+        0
+      )
+
+    return matchCount(beerB.tags) - matchCount(beerA.tags)
+  }
+
   public handleToggleTag = (tag: Itag) => {
     this.setState({
       selectedTags: Object.assign({}, this.state.selectedTags, {
@@ -92,6 +103,7 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
             {beerContext =>
               beerContext.beers
                 .filter(this.filterBeer)
+                .sort(this.sortBeer)
                 .slice(0, this.state.pagesDisplayed * 5)
                 .map((beer: Ibeer) => (
                   <BeerCard
