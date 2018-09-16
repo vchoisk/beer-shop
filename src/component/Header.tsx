@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 import { Button } from '../widgets/Button'
+import { BeerContext } from '../context/BeerContext'
 
 import menu from '../asset/icons/menu.svg'
 import menuSelected from '../asset/icons/menu-selected.svg'
@@ -44,6 +45,30 @@ class HeaderWithoutRouter extends React.Component<RouteComponentProps, {}> {
                 alt="go to cart"
               />
             </Button>
+            <BeerContext.Consumer>
+              {beerContext => {
+                const inCartTypeCount = Object.keys(
+                  beerContext.selectedBeers
+                ).reduce(
+                  (sum: number, id: string) =>
+                    beerContext.selectedBeers[id] &&
+                    beerContext.selectedBeers[id] > 0
+                      ? sum + 1
+                      : sum,
+                  0
+                )
+
+                return (
+                  <React.Fragment>
+                    {inCartTypeCount > 0 && (
+                      <div className="nav-bar__cart-count">
+                        {inCartTypeCount}
+                      </div>
+                    )}
+                  </React.Fragment>
+                )
+              }}
+            </BeerContext.Consumer>
           </div>
         </div>
       </div>
