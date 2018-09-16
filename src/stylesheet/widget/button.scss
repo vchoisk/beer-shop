@@ -14,6 +14,7 @@
 
 .widget-button.bordered {
   border: solid 1px black;
+  padding: 11px;
 }
 
 .widget-button.primary {
@@ -22,6 +23,7 @@
 
 .widget-button.primary.bordered {
   border: solid 1px $primaryBlue;
+  padding: 11px;
 }
 
 .widget-button.primary.contained {
@@ -35,6 +37,7 @@
 
 .widget-button.secondary.bordered {
   border: solid 1px $secondaryGrey;
+  padding: 11px;
 }
 
 .widget-button.secondary.contained {
