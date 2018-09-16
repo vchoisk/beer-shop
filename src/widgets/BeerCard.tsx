@@ -43,14 +43,18 @@ export const BeerCard = (props: IBeerCardProps) => (
       </div>
     </div>
     <div className="beer-card__buttons">
-      <Button
-        className="beer-card__button-subtract"
-        secondary
-        variant="contained"
-        onClick={props.handleRemoveBeer}
-      >
-        <span>빼기</span>
-      </Button>
+      {props.count
+        ? props.count > 0 && (
+            <Button
+              className="beer-card__button-subtract"
+              secondary
+              variant="contained"
+              onClick={props.handleRemoveBeer}
+            >
+              <span>빼기</span>
+            </Button>
+          )
+        : null}
       <Button
         className="beer-card__button-add"
         primary
