@@ -63,5 +63,8 @@
   .beer-card__buttons {
     margin-top: 12px;
     text-align: right;
+    .beer-card__button-subtract {
+      margin-right: 8px;
+    }
   }
 }

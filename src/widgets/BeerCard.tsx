@@ -38,10 +38,14 @@ export class BeerCard extends React.Component<IBeerCardProps, {}> {
           </div>
         </div>
         <div className="beer-card__buttons">
-          <Button secondary variant="contained">
+          <Button
+            className="beer-card__button-subtract"
+            secondary
+            variant="contained"
+          >
             <span>빼기</span>
           </Button>
-          <Button primary variant="contained">
+          <Button className="beer-card__button-add" primary variant="contained">
             <span>담기</span>
           </Button>
         </div>
