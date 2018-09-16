@@ -2,6 +2,7 @@ import * as React from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
 import { Button } from '../widgets/Button'
+import { BeerCard } from '../widgets/BeerCard'
 
 import { fetchTags } from '../api/api'
 import { Itag } from '../interface'
@@ -62,7 +63,22 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
             </Button>
           ))}
         </div>
-        <div className="beer__beer-card-list">Beer</div>
+        <div className="beer__beer-card-list">
+          <BeerCard
+            beer={{
+              id: 0,
+              name: 'Cass',
+              image: 'a',
+              tags: [
+                { key: 10, name: '라거' },
+                { key: 32, name: '드라이' },
+                { key: 20, name: '국산맥주' },
+              ],
+              price: 500,
+              stock: 6,
+            }}
+          />
+        </div>
       </div>
     )
   }

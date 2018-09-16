@@ -1,2 +1,16 @@
 .beer {
+  .beer__category-toggle-buttons {
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding-bottom: 12px;
+    margin-right: -16px;
+
+    .beer__category-toggle-button.toggle-button {
+      margin-left: 8px;
+    }
+
+    .beer__category-toggle-button.toggle-button:last-of-type {
+      margin-right: 20px;
+    }
+  }
 }
