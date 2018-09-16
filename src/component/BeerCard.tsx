@@ -8,6 +8,12 @@ export interface IBeerCardProps {
 
 export class BeerCard extends React.Component<IBeerCardProps, {}> {
   public render() {
-    return <div>{this.props.beer.name}</div>
+    return (
+      <div className="beer-card">
+        <div className="beer-card__img-container">{this.props.beer.name}</div>
+        <div className="beer-card__information">{this.props.beer.name}</div>
+        <div className="beer-card__buttons">{this.props.beer.name}</div>
+      </div>
+    )
   }
 }
