@@ -35,12 +35,11 @@ class App extends React.Component<{}, {}> {
     )
   }
 
-  public removeBeerFromCart = (beer: Ibeer) => {
+  public removeBeerFromCart = (id: number) => {
     const newSelectedBeers = Object.assign({}, this.state.selectedBeers)
 
-    if (newSelectedBeers[beer.id]) {
-      newSelectedBeers[beer.id] =
-        newSelectedBeers[beer.id] > 0 ? newSelectedBeers[beer.id] - 1 : 0
+    if (newSelectedBeers[id] && newSelectedBeers[id] > 0) {
+      newSelectedBeers[id] = newSelectedBeers[id] - 1
     }
 
     this.setState(

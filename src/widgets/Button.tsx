@@ -8,7 +8,7 @@ export interface IButtonProps {
   secondary?: boolean | undefined
   disabled?: boolean | undefined
   className?: string
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent<HTMLElement>) => {}
 }
 
 export const Button = (props: IButtonProps) => {
@@ -34,10 +34,7 @@ export const Button = (props: IButtonProps) => {
   )
 
   return (
-    <div
-      className={buttonClassNames.join(' ')}
-      onClick={props.onClick || undefined}
-    >
+    <div className={buttonClassNames.join(' ')} onClick={props.onClick}>
       {props.children}
     </div>
   )

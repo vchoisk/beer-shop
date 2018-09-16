@@ -8,8 +8,8 @@ import beerImg from '../asset/beer_x1.png'
 export interface IBeerCardProps {
   beer: Ibeer
   count?: number
-  handleAddBeer?: (beer: Ibeer) => {}
-  handleRemoveBeer?: (id: number) => {}
+  handleAddBeer?: (event: React.MouseEvent<HTMLElement>) => {}
+  handleRemoveBeer?: (event: React.MouseEvent<HTMLElement>) => {}
 }
 
 export const BeerCard = (props: IBeerCardProps) => (
@@ -43,10 +43,16 @@ export const BeerCard = (props: IBeerCardProps) => (
         className="beer-card__button-subtract"
         secondary
         variant="contained"
+        onClick={props.handleRemoveBeer}
       >
         <span>빼기</span>
       </Button>
-      <Button className="beer-card__button-add" primary variant="contained">
+      <Button
+        className="beer-card__button-add"
+        primary
+        variant="contained"
+        onClick={props.handleAddBeer}
+      >
         <span>담기</span>
       </Button>
     </div>
