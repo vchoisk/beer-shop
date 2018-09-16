@@ -15,17 +15,23 @@ export const Cart = (props: RouteComponentProps) => {
     props.history.push(path)
   }
 
-  const handlePurchase = async (purchaseList: Ipurchase[]) => {
-    const response = await purchaseBeers(purchaseList)
+  const handlePurchase = async (purchaseList: Ipurchase[], cb: () => void) => {
+    try {
+      const response = await purchaseBeers(purchaseList)
 
-    if (response) {
-      console.log(
-        `요청하신 맥주 총 ${
-          response.totalCount
-        }병의 주문이 완료되었습니다. \n 주문금액 총 ${
-          response.totalPrice
-        }원이 결제 되었습니다.`
-      )
+      if (response) {
+        console.log(
+          `요청하신 맥주 총 ${
+            response.totalCount
+          }병의 주문이 완료되었습니다. \n 주문금액 총 ${
+            response.totalPrice
+          }원이 결제 되었습니다.`
+        )
+      }
+
+      cb()
+    } catch (error) {
+      console.log(error)
     }
   }
 
@@ -102,7 +108,8 @@ export const Cart = (props: RouteComponentProps) => {
                       .map((id: string) => ({
                         id,
                         count: beerContext.selectedBeers[id].count,
-                      }))
+                      })),
+                    beerContext.resetCart
                   )}
                 >
                   <span className="cart__purchase-button-text">구매하기</span>

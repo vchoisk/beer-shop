@@ -18,6 +18,9 @@ export const defaultBeerStore = {
   removeBeerFromCart: (id: number) => {
     alert(1 + 2)
   },
+  resetCart: (id: number) => {
+    alert(1 + 2)
+  },
 }
 
 export const BeerContext = React.createContext(defaultBeerStore)

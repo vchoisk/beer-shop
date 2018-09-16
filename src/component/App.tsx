@@ -20,6 +20,7 @@ class App extends React.Component<{}, {}> {
       selectedBeers: {},
       addBeerToCart: this.addBeerToCart,
       removeBeerFromCart: this.removeBeerFromCart,
+      resetCart: this.resetCart,
     })
   }
 
@@ -47,6 +48,10 @@ class App extends React.Component<{}, {}> {
     this.setState(
       Object.assign({}, this.state, { selectedBeers: newSelectedBeers })
     )
+  }
+
+  public resetCart = async () => {
+    this.setState({ selectedBeers: {} })
   }
 
   public render() {

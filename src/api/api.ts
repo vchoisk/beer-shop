@@ -1,6 +1,12 @@
 import db from './data/db'
 import { Itag, Ibeer, Ipurchase } from '../interface'
 
+const beerIdToIndexMapper = db.beers.reduce(
+  (mapper: { index: string; id: number }, beer: Ibeer, index: number) =>
+    Object.assign({ [String(beer.id)]: index }, mapper),
+  {}
+)
+
 const fakeAPI = (
   url: string,
   method: string,
@@ -50,24 +56,31 @@ const fakeAPI = (
               totalPrice: 0,
             }
 
-            const beerStock = db.beers.reduce(
-              (stockMapper, beer) =>
-                Object.assign({ [String(beer.id)]: beer }, stockMapper),
-              {}
-            )
-
             purchaseList.forEach((purchase: Ipurchase) => {
-              if (beerStock[purchase.id].stock >= purchase.count) {
+              // for each purchase check stock and accummulate summary total
+              if (
+                db.beers[beerIdToIndexMapper[purchase.id]].stock >=
+                purchase.count
+              ) {
                 total.totalCount += purchase.count
                 total.totalPrice +=
-                  purchase.count * beerStock[purchase.id].price
+                  purchase.count *
+                  db.beers[beerIdToIndexMapper[purchase.id]].price
               } else {
+                // else indicate request invalid
                 valid = false
               }
             })
 
             if (valid) {
-              resolve(total)
+              // Update cached db stock of purchased beer
+              purchaseList.forEach((purchase: Ipurchase) => {
+                db.beers[beerIdToIndexMapper[purchase.id]].stock =
+                  db.beers[beerIdToIndexMapper[purchase.id]].stock -
+                  purchase.count
+              })
+
+              setTimeout(resolve(total))
             } else {
               reject(new Error('not valid counts in the request'))
             }
@@ -92,12 +105,18 @@ export const fetchTags = async () => {
 }
 
 export const purchaseBeers = async (purchaseList: Ipurchase[]) => {
-  const purcahseSummary: {
-    totalCount: number
-    totalPrice: number
-  } | void = await fakeAPI('/api/purchase', 'POST', {
-    purchaseList,
-  })
-
-  return purcahseSummary
+  try {
+    const purcahseSummary: {
+      totalCount: number
+      totalPrice: number
+    } | void = await fakeAPI('/api/purchase', 'POST', {
+      purchaseList,
+    })
+    return purcahseSummary
+  } catch (error) {
+    throw {
+      title: '500: 구매 처리중 에러',
+      reason: error.message,
+    }
+  }
 }
