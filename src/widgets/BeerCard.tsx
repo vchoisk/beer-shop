@@ -65,7 +65,11 @@ export const BeerCard = (props: IBeerCardProps) => (
           primary={props.beer.stock - (props.count || 0) > 0}
           variant="contained"
           disabled={props.beer.stock - (props.count || 0) <= 0}
-          onClick={props.handleAddBeer}
+          onClick={
+            props.beer.stock - (props.count || 0) > 0
+              ? props.handleAddBeer
+              : undefined
+          }
         >
           <span>담기</span>
         </Button>
