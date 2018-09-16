@@ -16,9 +16,29 @@
 
   .beer__beer-card-list {
     text-align: center;
+    padding-bottom: 70px;
 
     .beer-card {
       margin-bottom: 16px;
+    }
+  }
+
+  .beer__show-more-button-container {
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: fixed;
+    bottom: 32px;
+    text-align: center;
+    background-color: white;
+    width: 84px;
+    height: 38px;
+    border-radius: 2em;
+    box-shadow: 0 3px 2px #d5d5d5;
+
+    .show-more-button__name {
+      color: #95959e;
+      font-size: 15px;
+      font-weight: 500;
     }
   }
 }

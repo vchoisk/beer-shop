@@ -15,12 +15,14 @@ export interface IBeerProps extends RouteComponentProps<any> {
 interface IBeerState {
   tags: Itag[]
   selectedTags: { [key: string]: boolean }
+  pagesDisplayed: number
 }
 
 export class Beer extends React.Component<IBeerProps, IBeerState> {
   public state = {
     tags: [],
     selectedTags: {},
+    pagesDisplayed: 1,
   }
 
   public componentDidMount = async () => {
@@ -37,6 +39,12 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
       selectedTags: Object.assign({}, this.state.selectedTags, {
         [tag.key]: !this.state.selectedTags[tag.key],
       }),
+    })
+  }
+
+  public handleShowMore = () => {
+    this.setState({
+      pagesDisplayed: this.state.pagesDisplayed + 1,
     })
   }
 
@@ -61,20 +69,30 @@ export class Beer extends React.Component<IBeerProps, IBeerState> {
         <div className="beer__beer-card-list">
           <BeerContext.Consumer>
             {beerContext =>
-              beerContext.beers.map((beer: Ibeer) => (
-                <BeerCard
-                  key={beer.id}
-                  beer={beer}
-                  count={beerContext.selectedBeers[beer.id]}
-                  handleAddBeer={beerContext.addBeerToCart.bind(null, beer)}
-                  handleRemoveBeer={beerContext.removeBeerFromCart.bind(
-                    null,
-                    beer.id
-                  )}
-                />
-              ))
+              beerContext.beers
+                .slice(0, this.state.pagesDisplayed * 5)
+                .map((beer: Ibeer) => (
+                  <BeerCard
+                    key={beer.id}
+                    beer={beer}
+                    count={beerContext.selectedBeers[beer.id]}
+                    handleAddBeer={beerContext.addBeerToCart.bind(null, beer)}
+                    handleRemoveBeer={beerContext.removeBeerFromCart.bind(
+                      null,
+                      beer.id
+                    )}
+                  />
+                ))
             }
           </BeerContext.Consumer>
+        </div>
+        <div className="beer__show-more-button-container">
+          <Button
+            className="beer__show-more-button"
+            onClick={this.handleShowMore}
+          >
+            <div className="show-more-button__name">더보기 +</div>
+          </Button>
         </div>
       </div>
     )

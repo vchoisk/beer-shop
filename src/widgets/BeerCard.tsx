@@ -26,19 +26,19 @@ export const BeerCard = (props: IBeerCardProps) => (
       </div>
       <div className="beer-card__price">
         {props.beer.price}
-        <span className="beer-card__price-label">원</span>
+        <span className="beer-card__price-label"> 원</span>
       </div>
       <div className="beer-card__counts">
         {!props.cartCard && (
           <div className="beer-card__stock-count">
-            <span className="beer-card__stock-label">재고</span>
+            <span className="beer-card__stock-label">재고 </span>
             {props.beer.stock - (props.count || 0)}
           </div>
         )}
         {props.count
           ? props.count > 0 && (
               <div className="beer-card__cart-count">
-                <span className="beer-card__count-label">수량</span>
+                <span className="beer-card__count-label">수량 </span>
                 {props.count}
               </div>
             )
