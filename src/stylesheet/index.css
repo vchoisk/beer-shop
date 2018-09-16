@@ -1,6 +1,6 @@
 @import 'base';
 
-@import '../widgets/stylesheet/widgets';
+@import '../widgets/stylesheet/index';
 
 @import 'header';
 @import 'beer';

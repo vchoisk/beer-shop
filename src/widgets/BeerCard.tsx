@@ -20,22 +20,18 @@ export class BeerCard extends React.Component<IBeerCardProps, {}> {
         <div className="beer-card__information">
           <div className="beer-card__name">{this.props.beer.name}</div>
           <div className="beer-card__tags">
-            {this.props.beer.tags.map((tag: Itag) => (
-              <span className="beer-card__tag" key={tag.key}>
-                {tag.name}
-              </span>
-            ))}
+            {this.props.beer.tags.map((tag: Itag) => tag.name).join(', ')}
           </div>
           <div className="beer-card__price">
             {this.props.beer.price}
-            <span>원</span>
+            <span className="beer-card__price-label">원</span>
           </div>
           <div className="beer-card__counts">
             <div className="beer-card__stock-count">
               <span className="beer-card__stock-label">재고</span>
               {this.props.beer.stock}
             </div>
-            <div className="beer-card__card-count">
+            <div className="beer-card__cart-count">
               <span className="beer-card__count-label">수량</span>
               {this.props.beer.name}
             </div>
